@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/stylesheet/style.css">
+  <script src="/javascripts/script.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-zinc-900 flex flex-col items-center justify-start min-h-screen py-10">
+
+  <!-- Form Section -->
+  <div class="form w-full max-w-md">
+    <form id="taskForm" action="/create" method="post" class="bg-zinc-800/70 p-8 rounded-2xl shadow-xl flex flex-col gap-6">
+      
+      <input 
+        name="title"
+        type="text" 
+        id="taskTitle"
+        placeholder="Title goes here.." 
+        class="w-full px-4 py-3 rounded-xl bg-zinc-900 text-zinc-200 placeholder-zinc-500 border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+      >
+
+      <textarea 
+        name="details"
+        id="taskDetails"
+        placeholder="Write your task details here..." 
+        class="w-full px-4 py-3 rounded-xl bg-zinc-900 text-zinc-200 placeholder-zinc-500 border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none h-32"
+      ></textarea>
+
+      <input 
+        type="submit" 
+        value="Create Task" 
+        class="cursor-pointer w-full py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold shadow-md hover:shadow-lg transition-transform active:scale-95"
+      >
+
+    </form>
+  </div>
+
+  <!-- Tasks Section -->
+<div id="tasks" class="tasks w-full max-w-4xl mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center">
+  <% if (files.length > 0) { %>
+    <% files.forEach(function(val) { %>
+      <div class="task bg-zinc-800 p-6 rounded-xl shadow-lg" >
+        <h1 class="text-white text-lg font-semibold"><%= val %></h1>
+        <div class="flex w-full justify-between items-center">
+            <a  class="text-indigo-400 hover:underline  inline-block" href="/files/<%=val %>">Read more...</a>
+            <a class="text-blue-500" href="/edit/<%=val  %>">edit filename</a>
+        </div>
+      </div>
+    <% }); %>
+  <% } else { %>
+    <p id="noTaskMsg" class="col-span-full text-zinc-400 italic">No task created yet...</p>
+  <% } %>
+</div>
+
+  </div>
+  
+</body>
+</html>
